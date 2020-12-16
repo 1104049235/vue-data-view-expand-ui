@@ -13,40 +13,40 @@
                 <span class="config-source_header_title">设置数据源</span>
                 <i class="el-icon-close" @click="onClosePopup"></i>
             </div>
-             <y-form-item   title="数据源类型" 
-                            :width="332" 
-                            height="auto" 
+             <y-form-item   title="数据源类型"
+                            :width="332"
+                            height="auto"
                             align="topToBottom"
                             :staticTitle = "true">
                 <y-select :options="dataSourceOptions" v-model="dataSourceType"></y-select>
              </y-form-item>
-             <y-form-item   title="选择已有数据源" 
-                            :width="332" 
-                            height="auto" 
+             <y-form-item   title="选择已有数据源"
+                            :width="332"
+                            height="auto"
                             align="topToBottom"
                             :staticTitle = "true"
                             v-show="dataSourceType === '数据库'">
                 <y-select :options="dataSourceList" v-model="dataSourceListDefault"></y-select>
              </y-form-item>
-              <y-form-item  :title="dataSourceType === '数据库' ? 'SQL': '文本'" 
-                            :width="332" 
-                            height="auto" 
+              <y-form-item  :title="dataSourceType === '数据库' ? 'SQL': '文本'"
+                            :width="332"
+                            height="auto"
                             align="topToBottom"
                             :staticTitle="true"
                             >
                            <div>
-                                <monaco  id="config-source" 
-                                         :value="configTextValue" 
-                                         :language="dataSourceType !== 'static' ? 'sql' : 'json'" 
-                                         :readOnly="false" 
+                                <monaco  id="config-source"
+                                         :value="configTextValue"
+                                         :language="dataSourceType !== 'static' ? 'sql' : 'json'"
+                                         :readOnly="false"
                                          :height="200"
                                          @blur="onBlur">
                                 </monaco>
-                           </div>            
+                           </div>
              </y-form-item>
-              <y-form-item  title="数据响应结果为列表,列表元素包含如下字段" 
-                            :width="332" 
-                            height="auto" 
+              <y-form-item  title="数据响应结果为列表,列表元素包含如下字段"
+                            :width="332"
+                            height="auto"
                             align="topToBottom"
                             :staticTitle="true"
                             >
@@ -56,22 +56,22 @@
                                    <y-table-column label="映射" prop="mapping" :width="60"></y-table-column>
                                    <y-table-column label="说明" prop="description" width="auto"></y-table-column>
                                </y-table>
-                           </div>            
+                           </div>
              </y-form-item>
-              <y-form-item  title="数据响应结果(只读)" 
-                            :width="332" 
-                            height="auto" 
+              <y-form-item  title="数据响应结果(只读)"
+                            :width="332"
+                            height="auto"
                             align="topToBottom"
                             :staticTitle="true"
                             >
                            <div>
-                                <monaco  id="config-source-result" 
-                                         :value="value.json" 
+                                <monaco  id="config-source-result"
+                                         :value="value.json"
                                          :height="350">
                                 </monaco>
-                           </div>            
+                           </div>
              </y-form-item>
-        </div>        
+        </div>
     </div>
 </template>
 
@@ -102,7 +102,8 @@ export default  {
    },
    created(){
        this.dataSourceType = this.value.dataType
-       this.$axios.post('/connection/all')
+        //ljwtodo 数据库链接
+       /*this.$axios.post('/connection/all')
         .then((res) => {
             if(res.code === 200){
                 res.body.forEach(element => {
@@ -116,10 +117,10 @@ export default  {
         })
         .catch((e) => {
             console.warn(e.message)
-        })
+        })*/
    },
    mounted(){
-       
+
    },
    computed:{
        configTextValue(){

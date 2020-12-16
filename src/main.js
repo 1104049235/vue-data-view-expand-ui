@@ -8,7 +8,7 @@ import '@/utils/directives.js' //弹出框拖动
 import * as mUtils from '@/common/js/mUtils'
 import Element from 'element-ui'
 import './assets/styles/element-variables.scss'
-
+import config from '@/api/config'
 import '@/assets/styles/index.scss' // global css
 import '@/assets/styles/rky.scss' // rky css
 import App from './App'
@@ -52,6 +52,7 @@ Vue.use(EndataV)//封装dataV组件
  */
 Vue.prototype.$mUtils = mUtils;
 Vue.prototype.AES = AES
+Vue.prototype.$config = config
 
 // 全局方法挂载
 Vue.prototype.getDicts = getDicts

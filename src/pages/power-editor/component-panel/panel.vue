@@ -28,6 +28,7 @@
 
 <script>
 import { createUUID } from '@/common/js/mUtils'
+import { getDataVModel,modelDetail } from '@/api/datav/datavmodel'
 export default {
     name: 'ComponentPanel',
     data(){
@@ -39,22 +40,20 @@ export default {
             dbTypeDefaultVal: '全部',
             searchVal:"",
             groupComponentList: []
-       } 
+       }
     },
     mounted(){
         this.initData()
     },
     methods:{
         initData(){
-            this.$axios.get('/groupcomponent/all')
-            .then((res) => {
-                if(res.code === 200){
-                    this.groupComponentList = res.body
-                }
-            })
-            .catch(e => {
-                console.warn(e.message)
-            })
+          getDataVModel().then(response=>{
+            console.log("测试内容");
+            console.log(response);
+            let obj = eval('(' + response.rows[0].remark + ')') ;
+            console.log(obj);
+            this.groupComponentList = obj;
+          });
         },
         onDrag(e){
             let title = e.currentTarget.dataset.title
@@ -62,19 +61,18 @@ export default {
         },
         onAddComponent(e){
             let title = e.currentTarget.dataset.title
-            this.$axios.post('/componentconfig/detail', {name: title})
-             .then((res) => {
-                 if(res.code === 200){
-                     let dynamicConfig = res.body
-                     dynamicConfig.uuid = createUUID()
-                     dynamicConfig.props[0].fields[1].value[0].value.value = 0
-                     dynamicConfig.props[0].fields[1].value[1].value.value = 0
-                     this.$store.dispatch('addElement', dynamicConfig)
-                 }
-             })
-             .catch(e =>{
-                 console.warn(e.message)
-             })
+            modelDetail(title).then(response=>{
+            console.log(response);
+              let dynamicConfig = response.rows[0]
+              dynamicConfig.props = eval("("+dynamicConfig.props +")")
+              dynamicConfig.uuid = createUUID()
+              dynamicConfig.props[0].fields[1].value[0].value.value = 0
+              dynamicConfig.props[0].fields[1].value[1].value.value = 0
+              dynamicConfig._id = dynamicConfig.id;
+              delete dynamicConfig.id
+              console.log(dynamicConfig);
+              this.$store.dispatch('addElement', dynamicConfig)
+            });
         }
     }
 }
@@ -95,7 +93,7 @@ export default {
             align-items: center;
             background: rgb(46,52,60);
             .panel-header_title{
-                
+
             }
         }
         .panel-group{
@@ -125,7 +123,7 @@ export default {
                      justify-content: center;
                      align-items: center;
                      height: 22px;
-                     
+
                  }
             }
         }

@@ -1,6 +1,6 @@
 <template>
     <div class="c-chartline" :id="localUUID">
-        
+
     </div>
 </template>
 
@@ -17,7 +17,7 @@ const DATA = [{"DAY":"2020-03-14T16:00:00.000Z","NUM":300,"SERIES":"新增确诊
         '三角型': 'triangle',
         '线型': 'line',
         '连字符': 'hyphen'
-    }   
+    }
   const LAYOUT = {
       '水平排列': 'horizontal',
       '垂直排列': 'vertical'
@@ -143,7 +143,7 @@ export default {
             if(val&&this.chartInstance){
                 this.chartInstance.destroy()
                 this.initData()
-            }     
+            }
         },
         modelTrigger(){
             if(this.chartInstance){
@@ -205,13 +205,13 @@ export default {
            if(this.chartInstance){
                 this.chartInstance.destroy()
                 this.initData()
-            }   
+            }
         },
         xPoint(){
            if(this.chartInstance){
                 this.chartInstance.destroy()
                 this.initData()
-            }   
+            }
         },
         yGrid(){
             this.axisY()
@@ -248,7 +248,7 @@ export default {
             let width = parseInt(this.width)
             let height = parseInt(this.height)
             this.initMapping()
-         
+
             this.chartInstance = new Chart({
                 container: this.localUUID,
                 autoFit: false,
@@ -265,7 +265,7 @@ export default {
             })
             if(this.xArea){
                 this.chartInstance.area().adjust('stack').position(pos).color(col, this.ChageColor)
-            } 
+            }
             if(this.xPoint){
                 this.chartInstance.point().adjust('stack').position(pos).color(col, this.ChageColor)
             }
@@ -294,7 +294,7 @@ export default {
             }
         },
         resizeChart(){
-            let width = parseInt(this.width) 
+            let width = parseInt(this.width)
             let height = parseInt(this.height)
             this.chartInstance.changeSize(width,height)
         },
@@ -327,7 +327,7 @@ export default {
             let format = null
             if(this.xFormart !== '不处理'){
                 format = (date) => {
-                    return moment(date).format(this.xFormart) 
+                    return moment(date).format(this.xFormart)
                 }
             }
             this.chartInstance.axis(this.mappings[0].field, {

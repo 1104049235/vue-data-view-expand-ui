@@ -80,11 +80,11 @@
                             <y-input v-model="txtServiceNameVal"></y-input>
                         </div>
                         <div class="project-list_confirm marginT20">
-                            <y-button text="测试连接" 
-                                      :width="150" 
-                                      :showIcon="false" 
-                                      @click="onTest" 
-                                      :hollow="true" 
+                            <y-button text="测试连接"
+                                      :width="150"
+                                      :showIcon="false"
+                                      @click="onTest"
+                                      :hollow="true"
                                       popper="marginR20"
                             ></y-button>
                             <y-button text="确定" :width="150" :showIcon="false" @click="onConfirm"></y-button>
@@ -121,7 +121,8 @@
     },
     methods:{
         initData(){
-            this.$axios.post('/connection/all')
+          //ljwtodo 数据库链接
+            /*this.$axios.post('/connection/all')
             .then((res) => {
                 if(res.code === 200){
                     this.datasourceList = res.body
@@ -129,7 +130,7 @@
             })
             .catch((e) => {
                 console.warn(e.message)
-            })
+            })*/
         },
         onTest(){
             let data = {
@@ -255,7 +256,7 @@
 
 <style lang="stylus">
     /**
-        *  菜单项 tooltips提示框的背景颜色  
+        *  菜单项 tooltips提示框的背景颜色
         **/
     .el-tooltip__popper{
         &.orderby-time_menu{
@@ -393,7 +394,7 @@
             .project-list_body{
                 display: flex;
                 flex-direction: row;
-                flex-wrap: wrap;    
+                flex-wrap: wrap;
                 .project-list_main_storage{
                     display: flex;
                     flex-direction: row;
@@ -482,7 +483,7 @@
                             flex:1;
                             text-align: center;
                             transform: skew(45deg);
-                            
+
                         }
                     }
                 }
