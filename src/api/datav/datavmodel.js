@@ -14,3 +14,19 @@ export function modelDetail(name) {
       params:{name:name},
     });
 }
+
+export function addProject(data){
+  return request({
+    url:"/datav/project",
+    method:'post',
+    data:data
+  });
+}
+
+export function editProject(data){
+  return request({
+    url:"/datav/project",
+    method:'put',
+    data:data
+  });
+}

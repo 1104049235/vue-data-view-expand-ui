@@ -14,10 +14,11 @@
 
 <script>
 import {mapState} from 'vuex'
+import {addProject } from '@/api/datav/datavmodel'
 export default {
     name:'EditorHeader',
     data(){
-        return { 
+        return {
         }
     },
     methods:{
@@ -29,8 +30,14 @@ export default {
         onSaveProject(){
             let id = this.$route.params.id
             let project = this.projectDataInfo
+            let pages = JSON.stringify(project.pages)
+            project.pages = pages;
             let newId = this.projectDataInfo._id ? this.projectDataInfo._id : id
-            if(newId){
+            console.log(project);
+            addProject(project).then(response=>{
+                console.log(response);
+            });
+            /*if(newId){
                 this.$axios.post('/project/update/' + newId, project).then((res) => {
                     if(res.code === 200){
                         this.$msgbox({
@@ -40,8 +47,9 @@ export default {
                         })
                     }
                 })
-            }   
+            }
             else{
+
                 this.$axios.post('/project/add', project).then((res) => {
                     if(res.code === 200){
                         let projectInfo = res.body
@@ -53,7 +61,7 @@ export default {
                         })
                     }
                 })
-            }
+            }*/
         },
         onPreview(){
             let id = this.projectDataInfo._id
@@ -75,7 +83,7 @@ export default {
                         })
                         this.$router.push({
                             name: 'projectCreate'
-                        })                        
+                        })
                     }
                 })
            }
